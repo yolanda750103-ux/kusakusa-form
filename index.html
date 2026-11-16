@@ -704,7 +704,15 @@
       } catch (err) {
         console.warn('Local storage unavailable:', err);
       }
-
+// 同步傳送名單至 Google 試算表
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzdhU9TO4zEPxurQGb3K3LPK1hedesFu6EcWjC083kX7jqIP97KqU-u30awQTIiPSaY/exec
+';
+  fetch(SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(submissionRecord)
+  }).catch(err => console.error('試算表傳送失敗:', err));
       // Populate Confirmation Summary
       document.getElementById('summaryContact').textContent = `${submissionRecord.channel}｜${submissionRecord.contact}`;
       document.getElementById('summaryProducts').textContent = submissionRecord.products;
